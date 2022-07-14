@@ -26,8 +26,8 @@ typedef struct {
 	uint32_t		verf_flavor;
 	uint32_t		verf_len;
 	u_char			*pos;
-    ngx_pool_t		*pool;
-    ngx_log_t		*log;
+	ngx_pool_t		*pool;
+	ngx_log_t		*log;
 	unsigned int	sent_auth_tls:1;
 	unsigned int	skip_auth_tls:1;
 } ngx_stream_rpc_tls_ctx_t;
@@ -50,7 +50,7 @@ ngx_stream_rpc_tls_commands[] = {
 
     { ngx_string("rpc_tls_server"),
       NGX_STREAM_SRV_CONF|NGX_CONF_FLAG,
-	  ngx_conf_set_flag_slot,  
+	  ngx_conf_set_flag_slot,
       NGX_STREAM_SRV_CONF_OFFSET,
 	  offsetof(ngx_stream_rpc_tls_conf_t, server),
       NULL },
@@ -179,7 +179,7 @@ ngx_stream_rpc_tls_read(ngx_stream_session_t *s)
 
         c->buffer->last += n;
 	}
-	
+
 	if (rc == NGX_AGAIN) {
 		ngx_log_debug0(NGX_LOG_DEBUG_STREAM, c->log, 0, "nsrt_read: schedule read event handler");
 		if (ngx_handle_read_event(c->read, 0) != NGX_OK) {
